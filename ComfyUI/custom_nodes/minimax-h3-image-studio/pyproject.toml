@@ -1,0 +1,22 @@
+[project]
+name = "minimax-h3-image-studio"
+version = "24.1.0"
+description = "ComfyUI nodes and workflows for MiniMax H3 image generation and editing."
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+dependencies = []
+classifiers = [
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Repository = "https://github.com/astropuzzo/ComfyUI-MiniMax-H3-Image-Studio"
+"Bug Tracker" = "https://github.com/astropuzzo/ComfyUI-MiniMax-H3-Image-Studio/issues"
+
+[tool.comfy]
+PublisherId = "astropuzzo"
+DisplayName = "MiniMax H3 Image Studio"
+Icon = "https://raw.githubusercontent.com/astropuzzo/ComfyUI-MiniMax-H3-Image-Studio/main/assets/branding/minimax-h3-image-studio.svg"
+Banner = "https://raw.githubusercontent.com/astropuzzo/ComfyUI-MiniMax-H3-Image-Studio/main/assets/branding/minimax-h3-banner.svg"
+requires-comfyui = ">=0.37.0"

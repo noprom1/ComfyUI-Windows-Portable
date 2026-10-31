@@ -1,0 +1,1020 @@
+/* Shared styling for the LoRA Manager frontend widgets */
+.lm-tooltip {
+  position: fixed;
+  z-index: 10001;
+  background: rgba(0, 0, 0, 0.85);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  display: none;
+  overflow: hidden;
+  max-width: 300px;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+
+.lm-tooltip__media-container {
+  position: relative;
+  max-width: 300px;
+  max-height: 300px;
+}
+
+.lm-tooltip__media {
+  max-width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+  display: block;
+}
+
+.lm-tooltip__label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 8px;
+  color: white;
+  font-size: 13px;
+  font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  text-align: center;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  line-height: 1.4;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.lm-tooltip__license-overlay {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(10, 10, 14, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  max-width: calc(100% - 16px);
+}
+
+.lm-tooltip__license-icon {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0.9);
+  -webkit-mask: var(--license-icon-image) center/contain no-repeat;
+  mask: var(--license-icon-image) center/contain no-repeat;
+}
+
+/* Set 2 — new style license overlay */
+.lm-tooltip__license-overlay-new {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 5px 8px;
+  border-radius: 999px;
+  background: rgba(10, 10, 14, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  max-width: calc(100% - 16px);
+}
+
+.lm-tooltip__license-icon-new {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  border-radius: 3px;
+  -webkit-mask: var(--license-icon-image) center/contain no-repeat;
+  mask: var(--license-icon-image) center/contain no-repeat;
+}
+
+.lm-tooltip__license-icon-new.allowed {
+  background-color: #40c057;
+}
+
+.lm-tooltip__license-icon-new.denied {
+  background-color: #fa5252;
+}
+
+.lm-loras-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 6px;
+  background-color: var(--lm-surface);
+  border-radius: 6px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: auto;
+  outline: none;
+}
+
+/* Vue node mode: prevent content from pushing node size via ResizeObserver.
+   contain:size breaks the feedback loop — the container's intrinsic size
+   is determined solely by CSS, not by how many LoRAs are inside. */
+.lm-loras-container.lm-vue-node {
+  height: 100%;
+  min-height: var(--comfy-widget-min-height, 200px);
+  contain: layout size;
+}
+
+.lm-loras-container:focus {
+  outline: none;
+}
+
+/* Trigger-word widget container (tags_widget.js) */
+.comfy-tags-container {
+  background-color: var(--lm-surface);
+}
+
+/* Vue node mode: prevent content from pushing node size via ResizeObserver.
+   Same technique as .lm-loras-container.lm-vue-node above. */
+.comfy-tags-container.lm-vue-node {
+  height: 100%;
+  min-height: var(--comfy-widget-min-height, 150px);
+  contain: layout size;
+}
+
+/* Empty-state copy. The font size must be explicit: in canvas mode these
+   elements inherit ComfyUI's body size (16px) instead of the smaller widget
+   size used by the Vue node renderer, which made the placeholder look bold
+   and oversized — most visibly on light palettes. */
+.lm-lora-empty-state {
+  text-align: center;
+  padding: 16px 0;
+  color: var(--lm-fg-subtle);
+  font-size: 12px;
+  font-style: italic;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  width: 100%;
+}
+
+.lm-loras-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 8px;
+  border-bottom: 1px solid var(--lm-border-soft);
+  margin-bottom: 5px;
+  position: relative;
+  cursor: ew-resize;
+  touch-action: none;
+}
+
+.lm-toggle-container {
+  display: flex;
+  align-items: center;
+}
+
+.lm-toggle-label,
+.lm-strength-label {
+  color: var(--lm-fg-muted);
+  font-size: 13px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.lm-toggle-label {
+  margin-left: 8px;
+}
+
+.lm-strength-label {
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.lm-drag-hint {
+  margin-left: 5px;
+  font-size: 11px;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.lm-loras-header:hover .lm-drag-hint {
+  opacity: 1;
+}
+
+.lm-lora-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  margin-bottom: 4px;
+  border: 1px solid transparent;
+  background-color: var(--lm-surface-raised);
+  touch-action: none;
+  cursor: pointer !important;
+}
+
+.lm-lora-entry[data-active="false"] {
+  background-color: var(--lm-surface);
+}
+
+.lm-lora-entry:hover {
+  background-color: var(--lm-surface-hover);
+}
+
+.lm-lora-entry[data-active="false"]:hover {
+  background-color: var(--lm-surface-hover);
+}
+
+.lm-lora-entry[data-selected="true"] {
+  background-color: var(--lm-surface-selected) !important;
+  border: 1px solid var(--lm-accent-border) !important;
+  box-shadow: 0 0 0 1px var(--lm-accent-soft) !important;
+}
+
+.lm-lora-entry[data-selected="true"][data-locked="true"] {
+  background-color: var(--lm-surface-selected) !important;
+  border-left: 3px solid var(--lm-warning-border) !important;
+  border-right: 1px solid var(--lm-accent-border) !important;
+  border-top: 1px solid var(--lm-accent-border) !important;
+  border-bottom: 1px solid var(--lm-accent-border) !important;
+  box-shadow: 0 0 0 1px var(--lm-accent-soft), inset 0 0 20px color-mix(in srgb, var(--lm-warning) 6%, transparent) !important;
+}
+
+.lm-lora-entry[data-selected="true"][data-locked="true"][data-active="false"] {
+  background-color: color-mix(in srgb, var(--lm-warning) 10%, var(--lm-surface)) !important;
+  border-left: 3px solid var(--lm-warning-border) !important;
+}
+
+.lm-lora-entry[data-missing="true"] {
+  background-color: var(--lm-danger-soft);
+  border: 1px solid var(--lm-danger-border);
+}
+
+.lm-lora-entry[data-missing="true"] .lm-lora-name {
+  color: var(--lm-danger-text);
+}
+
+.lm-lora-clip-entry[data-missing="true"] {
+  background-color: var(--lm-danger-soft);
+  border: 1px solid var(--lm-danger-border);
+  border-left: 2px solid var(--lm-danger-border);
+}
+
+.lm-lora-clip-entry[data-missing="true"] .lm-lora-name {
+  color: var(--lm-danger-text);
+}
+
+.lm-lora-name {
+  margin-left: 4px;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--lm-fg);
+  font-size: 13px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.lm-lora-entry[data-active="false"] .lm-lora-name {
+  color: var(--lm-fg-subtle);
+}
+
+.lm-lora-strength-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lm-lora-strength-input {
+  width: 50px;
+  min-width: 50px;
+  padding: 2px 4px;
+  border-radius: 4px;
+  border: 1px solid var(--lm-border-soft);
+  background: var(--lm-surface);
+  color: var(--lm-fg);
+  text-align: center;
+  font-size: 13px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.lm-lora-strength-input:focus {
+  outline: none;
+  border-color: var(--lm-accent);
+  box-shadow: 0 0 0 2px var(--lm-accent-soft);
+}
+
+/* Advisory cue: strength is outside the usage-tips recommended range.
+   Amber to distinguish it from the red "missing LoRA" error state. */
+.lm-lora-strength-input.lm-strength-out-of-range {
+  border-color: var(--lm-warning);
+  color: var(--lm-warning);
+}
+
+.lm-lora-strength-input.lm-strength-out-of-range:focus {
+  border-color: var(--lm-warning-border);
+  box-shadow: 0 0 0 2px var(--lm-warning-soft);
+}
+
+.lm-lora-strength-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.lm-lora-entry[data-active="false"] .lm-lora-strength-input {
+  color: var(--lm-fg-subtle);
+}
+
+.lm-lora-arrow {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  color: var(--lm-fg-muted);
+  transition: all 0.2s ease;
+}
+
+.lm-lora-arrow:hover {
+  color: var(--lm-fg);
+  transform: scale(1.2);
+}
+
+.lm-lora-arrow svg {
+  width: 12px;
+  height: 12px;
+}
+
+.lm-lora-expand-button {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  color: var(--lm-fg-muted);
+  background-color: var(--lm-surface-hover);
+  border: 1px solid var(--lm-border-soft);
+  border-radius: 3px;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.lm-lora-expand-button:hover {
+  background-color: var(--lm-accent-soft);
+  border-color: var(--lm-accent-border);
+  color: var(--lm-fg);
+  transform: scale(1.05);
+}
+
+.lm-lora-expand-button:active {
+  transform: scale(0.95);
+  background-color: var(--lm-accent-soft);
+}
+
+.lm-lora-expand-button:focus {
+  outline: none;
+}
+
+.lm-lora-expand-button:focus-visible {
+  box-shadow: 0 0 0 2px var(--lm-accent-border);
+}
+
+.lm-lora-toggle {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: var(--lm-surface-raised);
+  border: 1px solid var(--lm-border-soft);
+}
+
+.lm-lora-toggle--active {
+  background-color: var(--lm-accent);
+  border-color: var(--lm-accent);
+}
+
+.lm-lora-toggle:hover {
+  transform: scale(1.05);
+  box-shadow: var(--lm-shadow);
+}
+
+.lm-lora-drag-handle {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  user-select: none;
+  color: var(--lm-fg-subtle);
+  transition: all 0.2s ease;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+.lm-lora-drag-handle svg {
+  width: 14px;
+  height: 14px;
+}
+
+.lm-lora-drag-handle:hover {
+  color: var(--lm-fg);
+  transform: scale(1.1);
+}
+
+.lm-lora-drag-handle:active {
+  cursor: grabbing;
+}
+
+.lm-lora-lock-button {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  background-color: var(--lm-surface-hover);
+  border: 1px solid var(--lm-border-soft);
+  border-radius: 3px;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  padding: 0;
+  box-sizing: border-box;
+  margin-right: 8px;
+  color: var(--lm-fg-muted);
+}
+
+.lm-lora-lock-button svg {
+  width: 14px;
+  height: 14px;
+}
+
+.lm-lora-lock-button:hover {
+  background-color: var(--lm-accent-soft);
+  border-color: var(--lm-accent-border);
+  color: var(--lm-fg);
+  transform: scale(1.05);
+}
+
+.lm-lora-lock-button:active {
+  transform: scale(0.95);
+}
+
+.lm-lora-lock-button:focus {
+  outline: none;
+}
+
+.lm-lora-lock-button:focus-visible {
+  box-shadow: 0 0 0 2px var(--lm-accent-border);
+}
+
+.lm-lora-lock-button--locked {
+  background-color: var(--lm-warning-soft);
+  border-color: var(--lm-warning-border);
+  color: var(--lm-warning);
+  box-shadow: 0 0 8px var(--lm-warning-soft);
+}
+
+.lm-lora-lock-button--locked:hover {
+  background-color: var(--lm-warning-soft);
+  border-color: var(--lm-warning-border);
+  box-shadow: 0 0 12px var(--lm-warning-soft);
+}
+
+/* Visual styling for locked lora entries */
+.lm-lora-entry[data-locked="true"] {
+  background-color: color-mix(in srgb, var(--lm-warning) 14%, var(--lm-surface));
+  border-left: 3px solid var(--lm-warning-border);
+  box-shadow: inset 0 0 20px color-mix(in srgb, var(--lm-warning) 6%, transparent);
+}
+
+.lm-lora-entry[data-locked="true"]:hover {
+  background-color: color-mix(in srgb, var(--lm-warning) 18%, var(--lm-surface));
+  box-shadow: inset 0 0 24px color-mix(in srgb, var(--lm-warning) 8%, transparent);
+}
+
+.lm-lora-entry[data-locked="true"][data-active="false"] {
+  background-color: color-mix(in srgb, var(--lm-warning) 10%, var(--lm-surface));
+  border-left: 3px solid var(--lm-warning-border);
+}
+
+.lm-lora-entry[data-locked="true"][data-active="false"]:hover {
+  background-color: color-mix(in srgb, var(--lm-warning) 12%, var(--lm-surface));
+}
+
+body.lm-lora-strength-dragging,
+body.lm-lora-strength-dragging * {
+  cursor: ew-resize !important;
+  user-select: none !important;
+}
+
+body.lm-lora-reordering,
+body.lm-lora-reordering * {
+  cursor: grabbing !important;
+  user-select: none !important;
+}
+
+.lm-lora-entry--dragging {
+  opacity: 0.5;
+  transform: scale(0.98);
+}
+
+.lm-lora-drop-indicator {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: var(--lm-accent);
+  border-radius: 2px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  box-shadow: 0 0 6px var(--lm-accent);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.lm-lora-strength-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.lm-lora-entry-left {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  gap: 6px;
+}
+
+.lm-lora-clip-entry {
+  margin-left: 10px;
+  margin-bottom: 4px;
+  padding: 6px;
+  padding-left: 20px;
+  border-radius: 6px;
+  background-color: var(--lm-surface-raised);
+  border: 1px solid var(--lm-accent-soft);
+  border-left: 2px solid var(--lm-accent-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s ease;
+  margin-top: -2px;
+  touch-action: none;
+  cursor: pointer !important;
+}
+
+.lm-lora-clip-entry[data-active="false"] {
+  background-color: var(--lm-surface);
+  border-color: var(--lm-accent-soft);
+  border-left-color: var(--lm-accent-soft);
+}
+
+.lm-lora-clip-entry:hover {
+  background-color: var(--lm-surface-hover);
+}
+
+.lm-lora-clip-entry[data-active="false"]:hover {
+  background-color: var(--lm-surface-hover);
+}
+
+.lm-lora-clip-entry .lm-lora-name {
+  font-size: 13px;
+  color: var(--lm-fg);
+  margin-left: 0;
+}
+
+.lm-lora-clip-entry[data-active="false"] .lm-lora-name {
+  color: var(--lm-fg-subtle);
+}
+
+.lm-lora-clip-entry .lm-lora-strength-input {
+  color: var(--lm-fg);
+}
+
+.lm-lora-clip-entry[data-active="false"] .lm-lora-strength-input {
+  color: var(--lm-fg-subtle);
+}
+
+.lm-lora-badge {
+  padding: 2px 6px;
+  border-radius: 12px;
+  background: var(--lm-accent-soft);
+  color: var(--lm-fg-muted);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.lm-lora-context-menu {
+  position: fixed;
+  background: var(--lm-surface);
+  border-radius: 8px;
+  box-shadow: var(--lm-shadow-lg);
+  padding: 8px 0;
+  z-index: 10000;
+  min-width: 180px;
+  border: 1px solid var(--lm-accent-soft);
+  backdrop-filter: blur(6px);
+}
+
+.lm-lora-menu-item {
+  padding: 6px 20px;
+  cursor: pointer;
+  color: var(--lm-fg);
+  font-size: 13px;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lm-lora-menu-item:hover {
+  background-color: var(--lm-accent-soft);
+}
+
+.lm-lora-menu-item-icon {
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lm-lora-context-menu hr {
+  border: none;
+  border-top: 1px solid var(--lm-border-soft);
+  margin: 6px 0;
+}
+
+.lm-trigger-count-badge {
+  font-variant-numeric: tabular-nums;
+  background-color: color-mix(in srgb, var(--lm-fg) 14%, transparent);
+  color: inherit;
+}
+
+.lm-trigger-count-badge--edited {
+  color: var(--lm-fg);
+  background-color: color-mix(in srgb, var(--lm-fg) 8%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--lm-fg) 28%, transparent);
+}
+
+.lm-trigger-group-edit-button {
+  transition: opacity 0.18s ease, color 0.18s ease;
+}
+
+.lm-trigger-group-edit-button:hover {
+  color: var(--lm-fg);
+}
+
+.lm-trigger-group-editor {
+  background: var(--lm-surface);
+  border: 1px solid var(--lm-accent-soft);
+  box-shadow: var(--lm-shadow-lg);
+  backdrop-filter: blur(6px);
+}
+
+.lm-trigger-group-editor__title {
+  color: var(--lm-fg);
+}
+
+.lm-trigger-group-editor__subtitle,
+.lm-trigger-group-editor__empty {
+  color: var(--lm-fg-muted);
+}
+
+/* Autocomplete styling */
+.lm-autocomplete-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lm-autocomplete-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.lm-autocomplete-count {
+  font-size: 11px;
+  color: var(--lm-fg-subtle);
+}
+
+/* Category badges: one hue per category, mixed against the popover surface
+   so both the tint and the text contrast flip with the theme. */
+.lm-autocomplete-category {
+  --lm-cat: var(--lm-cat-general);
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 10px;
+  white-space: nowrap;
+  background: color-mix(in oklab, var(--lm-cat) 22%, var(--lm-surface));
+  color: color-mix(in oklab, var(--lm-cat) 60%, var(--lm-fg));
+}
+
+.lm-autocomplete-category--general { --lm-cat: var(--lm-cat-general); }
+.lm-autocomplete-category--artist { --lm-cat: var(--lm-cat-artist); }
+.lm-autocomplete-category--copyright { --lm-cat: var(--lm-cat-copyright); }
+.lm-autocomplete-category--character { --lm-cat: var(--lm-cat-character); }
+.lm-autocomplete-category--meta { --lm-cat: var(--lm-cat-meta); }
+.lm-autocomplete-category--species { --lm-cat: var(--lm-cat-species); }
+.lm-autocomplete-category--lore { --lm-cat: var(--lm-cat-lore); }
+
+/* Command list styling */
+.comfy-autocomplete-command {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.lm-autocomplete-command-name {
+  font-family: 'Consolas', 'Monaco', monospace;
+  color: var(--lm-accent-text);
+}
+
+.lm-autocomplete-command-label {
+  font-size: 12px;
+  color: var(--lm-fg-subtle);
+}
+
+/* ---- Widget flash highlight (visual cue after a value is sent to a node) ---- */
+/* Applied to a widget row element when its value is updated by LoRA Manager.
+   Shifts the value text color to the LM brand accent with a CSS transition
+   for fade-in/fade-out. Removal (timeout / hover) is handled by JS.
+
+   The transition is declared on .lm-flash-host (added alongside .lm-flash)
+   rather than on ComfyUI's .lg-node-widget, so we don't impose a global
+   color transition on every widget input. The host class persists until
+   cleanup so fade-out still applies after .lm-flash is removed. */
+.lm-flash-host input,
+.lm-flash-host textarea,
+.lm-flash-host [role="combobox"] {
+  transition: color 0.25s ease, -webkit-text-fill-color 0.25s ease;
+}
+
+.lm-flash input,
+.lm-flash textarea,
+.lm-flash [role="combobox"] {
+  color: var(--lm-accent) !important;
+  -webkit-text-fill-color: var(--lm-accent) !important;
+}
+
+/* ---- Autocomplete dropdown (appended to <body>, so it is an .lm-popover) ---- */
+.comfy-autocomplete-dropdown {
+  background-color: var(--lm-surface);
+  border: 1px solid var(--lm-border-soft);
+  border-radius: 8px;
+  box-shadow: var(--lm-shadow-lg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.comfy-autocomplete-dropdown::-webkit-scrollbar,
+.comfy-autocomplete-scroll-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.comfy-autocomplete-dropdown::-webkit-scrollbar-track,
+.comfy-autocomplete-scroll-container::-webkit-scrollbar-track {
+  background: var(--lm-surface-raised);
+  border-radius: 4px;
+}
+
+.comfy-autocomplete-dropdown::-webkit-scrollbar-thumb,
+.comfy-autocomplete-scroll-container::-webkit-scrollbar-thumb {
+  background: var(--lm-border);
+  border-radius: 4px;
+}
+
+.comfy-autocomplete-dropdown::-webkit-scrollbar-thumb:hover,
+.comfy-autocomplete-scroll-container::-webkit-scrollbar-thumb:hover {
+  background: var(--lm-fg-subtle);
+}
+
+.comfy-autocomplete-item {
+  color: var(--lm-fg-muted);
+  border-bottom: 1px solid var(--lm-border-soft);
+  transition: background-color 0.12s ease;
+}
+
+.comfy-autocomplete-item-selected,
+.comfy-autocomplete-item:hover {
+  background-color: var(--lm-surface-selected);
+}
+
+.comfy-autocomplete-item:last-child {
+  border-bottom: none;
+}
+
+.comfy-autocomplete-info-item {
+  cursor: default;
+  color: var(--lm-fg-muted);
+}
+
+.comfy-autocomplete-loading {
+  color: var(--lm-fg-subtle);
+}
+
+.lm-matched-alias {
+  font-size: 11px;
+  color: var(--lm-fg-subtle);
+}
+
+.lm-autocomplete-command-footer {
+  color: var(--lm-fg-subtle);
+  border-top: 1px solid var(--lm-border-soft);
+}
+
+.lm-autocomplete-first-run-hint {
+  color: var(--lm-fg-subtle);
+  border-bottom: 1px solid var(--lm-border-soft);
+}
+
+.lm-autocomplete-first-run-hint__dismiss {
+  background: none;
+  border: none;
+  color: var(--lm-fg-subtle);
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  padding: 0 2px;
+}
+
+.lm-autocomplete-first-run-hint__dismiss:hover {
+  color: var(--lm-fg);
+}
+
+.lm-autocomplete-info-title {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.lm-autocomplete-info-description {
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--lm-fg-muted);
+}
+
+/* Wildcards info item: path block + usage examples + action buttons */
+.lm-autocomplete-info-path {
+  margin-top: 10px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: var(--lm-surface-raised);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.lm-autocomplete-info-path strong {
+  color: var(--lm-fg);
+  font-weight: 600;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.lm-autocomplete-info-path code {
+  color: var(--lm-accent-text);
+  word-break: break-all;
+}
+
+.lm-autocomplete-info-note {
+  margin-top: 6px;
+  color: var(--lm-fg-subtle);
+}
+
+.lm-autocomplete-info-examples {
+  margin-top: 10px;
+  font-size: 11px;
+  line-height: 1.55;
+  color: var(--lm-fg-muted);
+}
+
+.lm-autocomplete-info-examples strong {
+  display: block;
+  color: var(--lm-fg);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.lm-autocomplete-info-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.lm-autocomplete-action {
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.lm-autocomplete-action--primary {
+  border: 1px solid var(--lm-accent-border);
+  background: var(--lm-accent-soft);
+  color: var(--lm-accent-text);
+}
+
+.lm-autocomplete-action--secondary {
+  border: 1px solid var(--lm-border-soft);
+  background: var(--lm-surface-hover);
+  color: var(--lm-fg);
+}
+
+.lm-autocomplete-match {
+  background-color: var(--lm-accent-soft);
+  color: var(--lm-accent-text);
+  padding: 1px 2px;
+  border-radius: 2px;
+}
+
+/* ---- Trigger-word chips (created in tags_widget.js) ---- */
+.comfy-tag {
+  background-color: var(--lm-surface-raised);
+  color: var(--lm-fg-muted);
+  border: 1px solid var(--lm-border-soft);
+  box-shadow: var(--lm-shadow);
+}
+
+.comfy-tag[data-active="true"] {
+  background-color: var(--lm-accent);
+  border-color: var(--lm-accent);
+  color: var(--lm-on-accent);
+}
+
+/* Trigger words that belong to the LoRA currently selected in the loader.
+   The chip fill is accent (active) or surface (inactive), so the ring sits
+   outside a 1px surface-coloured gap and takes its colour from the theme
+   (accent blended towards the foreground). The gap uses the same token as the
+   container background, so it reads as a punched-out ring in every palette
+   and renderer, and the contrast flips with the theme automatically. */
+.comfy-tag[data-highlighted="true"] {
+  border-color: transparent;
+  box-shadow:
+    0 0 0 1px var(--lm-surface),
+    0 0 0 3px color-mix(in oklab, var(--lm-accent) 35%, var(--lm-fg)),
+    var(--lm-shadow);
+}
+
+.comfy-tag:hover {
+  box-shadow: var(--lm-shadow-lg);
+}
+
+/* Keep the ring on hover: the generic :hover rule above has the same
+   specificity and would otherwise replace the whole box-shadow. */
+.comfy-tag[data-highlighted="true"]:hover {
+  box-shadow:
+    0 0 0 1px var(--lm-surface),
+    0 0 0 3px color-mix(in oklab, var(--lm-accent) 35%, var(--lm-fg)),
+    var(--lm-shadow-lg);
+}
+
+.comfy-tag-strength {
+  background-color: var(--lm-surface-hover);
+  color: var(--lm-fg);
+  border: 1px solid var(--lm-border-soft);
+}
+
+/* See .lm-lora-empty-state: canvas mode needs an explicit size so the
+   placeholder matches the Vue node renderer's typography. */
+.lm-tags-empty {
+  color: var(--lm-fg-subtle);
+  font-size: 12px;
+  font-style: italic;
+  text-align: center;
+  padding: 16px 0;
+  width: 100%;
+  user-select: none;
+  -webkit-user-select: none;
+}

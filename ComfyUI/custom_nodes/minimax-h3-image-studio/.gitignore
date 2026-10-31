@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+*.log
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+.pytest_cache/
+.coverage
+benchmark-output/

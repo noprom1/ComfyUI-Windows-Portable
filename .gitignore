@@ -1,0 +1,36 @@
+# Python окружение разворачивается bootstrap-скриптом (setup.bat)
+python_standalone/
+pycache/
+HuggingFaceHub/
+TorchHome/
+
+# Кэши Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Пользовательские данные и артефакты работы
+ComfyUI/user/
+ComfyUI/temp/
+launcher_config.json
+*.log
+
+# Входные/выходные изображения (папки сохраняем через .gitkeep)
+ComfyUI/input/*
+!ComfyUI/input/.gitkeep
+ComfyUI/output/*
+!ComfyUI/output/.gitkeep
+
+# Файлы моделей — только в пользовательской папке models;
+# содержимое custom_nodes не трогаем (там есть нужные файлы апстрима)
+/ComfyUI/models/**/*.safetensors
+/ComfyUI/models/**/*.ckpt
+/ComfyUI/models/**/*.gguf
+/ComfyUI/models/**/*.onnx
+/ComfyUI/models/**/*.bin
+/ComfyUI/models/**/*.pt
+/ComfyUI/models/**/*.pth
+/ComfyUI/models/**/*.lora
+
+# Прочее
+.ipynb_checkpoints/

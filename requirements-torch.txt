@@ -1,0 +1,6 @@
+# PyTorch + CUDA 13.0. Устанавливается отдельно (нужен индекс pytorch):
+#   python -m pip install -r requirements-torch.txt --index-url https://download.pytorch.org/whl/cu130
+
+torch==2.10.0+cu130
+torchaudio==2.10.0+cu130
+torchvision==0.25.0+cu130
