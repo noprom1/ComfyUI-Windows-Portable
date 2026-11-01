@@ -69,7 +69,7 @@ tl\<код>\settings.json   — настройки
 
 | Нода | Версия | Описание |
 |---|---|---|
-| [auto_pip_upgrade](https://github.com/search?q=auto_pip_upgrade&type=repositories) | в составе сборки (без git) | [служебная] автообновление pip + самовосстановление выреза китайского языка фронтенда |
+| [auto_pip_upgrade](https://github.com/search?q=auto_pip_upgrade&type=repositories) | в составе сборки (без git) | [служебная] автообновление pip  |
 | [cg-use-everywhere](https://github.com/search?q=cg-use-everywhere&type=repositories) | `1e1d25f` (2026-10-26) | Use Everywhere: широковещательные связи без проводов |
 | [comfy_mtb](https://github.com/search?q=comfy_mtb&type=repositories) | `b35b5d8` (2026-07-04) | Утилиты mtb: INSIGHTFACE, анимация, дев-инструменты |
 | [ComfyLiterals](https://github.com/search?q=ComfyLiterals&type=repositories) | `bdddb08` (2023-11-19) | Литералы и переменные в графе |
